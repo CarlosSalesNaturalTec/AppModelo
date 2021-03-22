@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AppModeloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Consultas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="pacienteID" Type="int" />
+          <Property Name="especialidadeID" Type="int" />
+          <Property Name="dataConsulta" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Especialidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" />
+          <Property Name="CartaoSUS" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__Consultas__espec__286302EC">
+          <End Role="Especialidade" Type="Self.Especialidade" Multiplicity="0..1" />
+          <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consultas">
+              <PropertyRef Name="especialidadeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consultas__pacie__276EDEB3">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consultas">
+              <PropertyRef Name="pacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AppModeloModelStoreContainer">
+          <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Especialidade" EntityType="Self.Especialidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Consultas__espec__286302EC" Association="Self.FK__Consultas__espec__286302EC">
+            <End Role="Especialidade" EntitySet="Especialidade" />
+            <End Role="Consultas" EntitySet="Consultas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consultas__pacie__276EDEB3" Association="Self.FK__Consultas__pacie__276EDEB3">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Consultas" EntitySet="Consultas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AppModeloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Consultas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="pacienteID" Type="Int32" />
+          <Property Name="especialidadeID" Type="Int32" />
+          <Property Name="dataConsulta" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Especialidade" Relationship="Self.FK__Consultas__espec__286302EC" FromRole="Consultas" ToRole="Especialidade" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__Consultas__pacie__276EDEB3" FromRole="Consultas" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Especialidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consultas" Relationship="Self.FK__Consultas__espec__286302EC" FromRole="Especialidade" ToRole="Consultas" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CartaoSUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consultas" Relationship="Self.FK__Consultas__pacie__276EDEB3" FromRole="Paciente" ToRole="Consultas" />
+        </EntityType>
+        <Association Name="FK__Consultas__espec__286302EC">
+          <End Role="Especialidade" Type="Self.Especialidade" Multiplicity="0..1" />
+          <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialidade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consultas">
+              <PropertyRef Name="especialidadeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consultas__pacie__276EDEB3">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Consultas">
+              <PropertyRef Name="pacienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AppModeloEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consultas" EntityType="Self.Consultas" />
+          <EntitySet Name="Especialidade" EntityType="Self.Especialidade" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
+          <AssociationSet Name="FK__Consultas__espec__286302EC" Association="Self.FK__Consultas__espec__286302EC">
+            <End Role="Especialidade" EntitySet="Especialidade" />
+            <End Role="Consultas" EntitySet="Consultas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consultas__pacie__276EDEB3" Association="Self.FK__Consultas__pacie__276EDEB3">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Consultas" EntitySet="Consultas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AppModeloModelStoreContainer" CdmEntityContainer="AppModeloEntities">
+          <EntitySetMapping Name="Consultas">
+            <EntityTypeMapping TypeName="AppModeloModel.Consultas">
+              <MappingFragment StoreEntitySet="Consultas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="pacienteID" ColumnName="pacienteID" />
+                <ScalarProperty Name="especialidadeID" ColumnName="especialidadeID" />
+                <ScalarProperty Name="dataConsulta" ColumnName="dataConsulta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidade">
+            <EntityTypeMapping TypeName="AppModeloModel.Especialidade">
+              <MappingFragment StoreEntitySet="Especialidade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="AppModeloModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CartaoSUS" ColumnName="CartaoSUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
