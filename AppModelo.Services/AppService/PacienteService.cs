@@ -6,6 +6,14 @@ namespace AppModelo.Services.AppService
 {
     public class PacienteService
     {
+        public Paciente GetByID(int? id)
+        {
+            using (AppModeloEntities context = new AppModeloEntities())
+            {
+                return (from n in context.Paciente where n.Id == id select n).SingleOrDefault();
+            }
+        }
+
         public IEnumerable<Paciente> GetAllByID(int id)
         {
             using (AppModeloEntities context = new AppModeloEntities())

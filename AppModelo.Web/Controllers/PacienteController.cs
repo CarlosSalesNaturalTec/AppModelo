@@ -60,10 +60,11 @@ namespace AppModelo.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Paciente paciente = db.Paciente.Find(id);
+            Paciente paciente = service.GetByID(id);            
             if (paciente == null)
             {
-                return HttpNotFound();
+                ViewBag.id = id;
+                return View("NotFound");
             }
             return View(paciente);
         }
