@@ -1,0 +1,39 @@
+﻿@model IEnumerable<AppModelo.Services.Models.Paciente>
+
+@{
+    ViewBag.Title = "Pacientes";
+}
+
+<h2>Pacientes</h2>
+
+<p>
+    @Html.ActionLink("Incluir Novo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartaoSUS)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CartaoSUS)
+        </td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Alterar", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Apagar", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>
