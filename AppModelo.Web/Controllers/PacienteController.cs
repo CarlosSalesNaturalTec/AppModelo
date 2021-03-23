@@ -91,11 +91,9 @@ namespace AppModelo.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Paciente.Add(paciente);
-                db.SaveChanges();
+                service.Create(paciente);
                 return RedirectToAction("Search");
             }
-
             return View(paciente);
         }
 

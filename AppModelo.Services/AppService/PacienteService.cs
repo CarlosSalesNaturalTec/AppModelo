@@ -44,5 +44,15 @@ namespace AppModelo.Services.AppService
                 return (from n in context.Paciente where n.CartaoSUS.Contains(cartaoSUS) orderby n.Nome select n).ToList();
             }
         }
+
+        public Paciente Create(Paciente paciente)
+        {
+            using (AppModeloEntities context = new AppModeloEntities())
+            {
+                context.Paciente.Add(paciente);
+                context.SaveChanges();
+                return paciente;
+            }
+        }
     }
 }
