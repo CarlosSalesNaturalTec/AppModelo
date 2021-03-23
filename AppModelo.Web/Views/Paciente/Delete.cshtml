@@ -1,12 +1,11 @@
 ﻿@model AppModelo.Services.Models.Paciente
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Apagar";
 }
 
 <h2>Paciente</h2>
 
-<h3>Apagar</h3>
 <div>
     <h4>Tem certeza que deseja excluir este registro ?</h4>
     <hr />
@@ -29,11 +28,15 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Excluir" class="btn btn-default" /> 
-        </div>
+        <p>
+            <div class="col-md-offset-1">
+                <a href="javascript:history.go(-1)" class="btn btn-default">Voltar</a>
+                <input type="submit" value="Excluir" class="btn btn-danger" />
+            </div>
+        </p>
     }
 </div>

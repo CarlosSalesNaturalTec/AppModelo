@@ -28,6 +28,11 @@
 
     </dl>
 </div>
+
 <p>
-    @Html.ActionLink("Alterar", "Edit", new { id = Model.Id })
+    <div class="col-md-offset-1">
+        <a href="javascript:history.go(-1)" class="btn btn-default">Voltar</a>
+        <a href="@Url.Action("Edit", "Paciente")" class="btn btn-success">Alterar</a>
+    </div>       
 </p>
+

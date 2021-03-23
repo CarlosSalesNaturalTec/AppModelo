@@ -47,6 +47,12 @@ namespace AppModelo.Web.Controllers
             return View(viewModel);
         }
 
+        public ActionResult SearchAll()
+        {
+            IEnumerable<Paciente> pacientes = service.GetAll();
+            return View("Index", pacientes);
+        }
+
         // GET: Paciente
         public ActionResult Index(IEnumerable<Paciente> pacientes)
         {
@@ -60,6 +66,7 @@ namespace AppModelo.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Paciente paciente = service.GetByID(id);            
             if (paciente == null)
             {

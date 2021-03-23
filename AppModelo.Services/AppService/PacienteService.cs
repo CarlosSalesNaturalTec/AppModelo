@@ -13,6 +13,13 @@ namespace AppModelo.Services.AppService
                 return (from n in context.Paciente where n.Id == id select n).SingleOrDefault();
             }
         }
+        public IEnumerable<Paciente> GetAll()
+        {
+            using (AppModeloEntities context = new AppModeloEntities())
+            {
+                return (from n in context.Paciente orderby n.Nome select n).ToList();
+            }
+        }
 
         public IEnumerable<Paciente> GetAllByID(int id)
         {

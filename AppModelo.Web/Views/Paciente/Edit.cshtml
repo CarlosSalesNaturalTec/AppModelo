@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Alterar</h4>
         <hr />
@@ -35,11 +35,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <a href="javascript:history.go(-1)" class="btn btn-default">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
