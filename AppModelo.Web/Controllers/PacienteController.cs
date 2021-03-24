@@ -22,9 +22,6 @@ namespace AppModelo.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (viewModel.ID > 0)
-                    return View("Index", service.GetAllByID(viewModel.ID));
-
                 if (viewModel.Nome != null)
                     return View("Index", service.GetAllByNome(viewModel.Nome));
                 
