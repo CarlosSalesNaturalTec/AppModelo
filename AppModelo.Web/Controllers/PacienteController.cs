@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using AppModelo.Services.AppService;
 using AppModelo.Services.Models;
 using AppModelo.Web.Models;
+using PagedList;
 
 namespace AppModelo.Web.Controllers
 {
@@ -31,9 +32,13 @@ namespace AppModelo.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SearchAll()
+        public ActionResult SearchAll(int? page)
         {
-            return View("Index", service.GetAll());
+            int pageSize = 2; // numero de linhas por página
+            int pageNumber = (page ?? 1);
+            IEnumerable<Paciente> pacientes = service.GetAll();
+
+            return View("Index", pacientes.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Paciente
