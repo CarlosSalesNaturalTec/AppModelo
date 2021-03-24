@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using AppModelo.Services.Models;
 
@@ -50,6 +51,26 @@ namespace AppModelo.Services.AppService
             using (AppModeloEntities context = new AppModeloEntities())
             {
                 context.Paciente.Add(paciente);
+                context.SaveChanges();
+                return paciente;
+            }
+        }
+
+        public Paciente Edit(Paciente paciente)
+        {
+            using (AppModeloEntities context = new AppModeloEntities())
+            {
+                context.Entry(paciente).State = EntityState.Modified;
+                context.SaveChanges();
+                return paciente;
+            }
+        }
+
+        public Paciente Delete(Paciente paciente)
+        {
+            using (AppModeloEntities context = new AppModeloEntities())
+            {
+                context.Entry(paciente).State = EntityState.Deleted;
                 context.SaveChanges();
                 return paciente;
             }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AppModelo.Services.AppService;
 using AppModelo.Services.Models;
@@ -14,7 +9,6 @@ namespace AppModelo.Web.Controllers
 {
     public class PacienteController : Controller
     {
-        private AppModeloEntities db = new AppModeloEntities();
         private PacienteService service = new PacienteService();
 
         public ActionResult Search()
@@ -29,28 +23,20 @@ namespace AppModelo.Web.Controllers
             if (ModelState.IsValid)
             {
                 if (viewModel.ID > 0)
-                {
-                    IEnumerable<Paciente> pacientes = service.GetAllByID(viewModel.ID);
-                    return View("Index", pacientes);
-                }
+                    return View("Index", service.GetAllByID(viewModel.ID));
+
                 if (viewModel.Nome != null)
-                {
-                    IEnumerable<Paciente> pacientes = service.GetAllByNome(viewModel.Nome);
-                    return View("Index", pacientes);
-                }
+                    return View("Index", service.GetAllByNome(viewModel.Nome));
+                
                 if (viewModel.CartaoSUS != null)
-                {
-                    IEnumerable<Paciente> pacientes = service.GetAllByCartaoSUS(viewModel.CartaoSUS);
-                    return View("Index", pacientes);
-                }
+                    return View("Index", service.GetAllByCartaoSUS(viewModel.CartaoSUS));
             }
             return View(viewModel);
         }
 
         public ActionResult SearchAll()
         {
-            IEnumerable<Paciente> pacientes = service.GetAll();
-            return View("Index", pacientes);
+            return View("Index", service.GetAll());
         }
 
         // GET: Paciente
@@ -63,11 +49,9 @@ namespace AppModelo.Web.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            Paciente paciente = service.GetByID(id);            
+            Paciente paciente = service.GetByID(id);
             if (paciente == null)
             {
                 ViewBag.id = id;
@@ -101,13 +85,13 @@ namespace AppModelo.Web.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Paciente paciente = db.Paciente.Find(id);
+
+            Paciente paciente = service.GetByID(id);
             if (paciente == null)
             {
-                return HttpNotFound();
+                ViewBag.id = id;
+                return View("NotFound");
             }
             return View(paciente);
         }
@@ -121,8 +105,7 @@ namespace AppModelo.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(paciente).State = EntityState.Modified;
-                db.SaveChanges();
+                service.Edit(paciente);
                 return RedirectToAction("Search");
             }
             return View(paciente);
@@ -132,13 +115,13 @@ namespace AppModelo.Web.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Paciente paciente = db.Paciente.Find(id);
+
+            Paciente paciente = service.GetByID(id);
             if (paciente == null)
             {
-                return HttpNotFound();
+                ViewBag.id = id;
+                return View("NotFound");
             }
             return View(paciente);
         }
@@ -148,19 +131,10 @@ namespace AppModelo.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Paciente paciente = db.Paciente.Find(id);
-            db.Paciente.Remove(paciente);
-            db.SaveChanges();
+            Paciente paciente = service.GetByID(id);
+            service.Delete(paciente);
             return RedirectToAction("Search");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }
