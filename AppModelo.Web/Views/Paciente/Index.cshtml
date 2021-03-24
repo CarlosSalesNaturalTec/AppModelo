@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<AppModelo.Services.Models.Paciente>
 
 @{
-    ViewBag.Title = "Pacientes";
+    ViewBag.Title = "Listagem de Pacientes";
 }
 
-<h2>Pacientes</h2>
+<h2>Listagem de Pacientes</h2>
 
 <p>
-    <a href="@Url.Action("Search", "Paciente")" class="btn btn-default">Voltar</a>
-    <a href="@Url.Action("Create", "Paciente")" class="btn btn-success">Novo</a>
+    <a href="javascript:history.go(-1)" class="btn btn-default" data-toggle="tooltip" title="Voltar"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+    <a href="@Url.Action("Create", "Paciente")" class="btn btn-primary" data-toggle="tooltip" title="Novo Paciente"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
 </p>
 <table class="table">
     <tr>

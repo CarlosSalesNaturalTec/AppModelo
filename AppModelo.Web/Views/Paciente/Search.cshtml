@@ -1,21 +1,26 @@
 ﻿@model AppModelo.Web.Models.PacienteViewModel
 
 @{
-    ViewBag.Title = "Pesquisa";
+    ViewBag.Title = "Pesquisa de Pacientes";
 }
 
-<h2>Pesquisa</h2>
+<h2>Pesquisa de Pacientes</h2>
+
+<div class="form-group">
+    <a href="@Url.Action("SearchAll", "Paciente")" class="btn btn-default" data-toggle="tooltip" title="Todos os Pacientes"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
+    <a href="@Url.Action("Create", "Paciente")" class="btn btn-primary" data-toggle="tooltip" title="Novo Paciente"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+</div>
+<hr />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="form-horizontal" style="padding-left:15px">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            <div class="input-group col-md-offset-1">
+            <div class="input-group">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </span>
@@ -25,7 +30,7 @@
         </div>
 
         <div class="form-group">
-            <div class="input-group col-md-offset-1">
+            <div class="input-group">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                 </span>
@@ -35,12 +40,6 @@
 
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-1">
-                <a href="@Url.Action("SearchAll", "Paciente")" class="btn btn-default">Todos</a>
-                <a href="@Url.Action("Create", "Paciente")" class="btn btn-primary">Novo</a>
-            </div>
-        </div>
     </div>
 }
 

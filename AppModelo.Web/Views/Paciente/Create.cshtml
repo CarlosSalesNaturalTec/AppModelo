@@ -40,8 +40,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-1 col-md-10">
-                <a href="@Url.Action("Search", "Paciente")" class="btn btn-default">Voltar</a>
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a href="javascript:history.go(-1)" class="btn btn-default" data-toggle="tooltip" title="Cancelar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Salvar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>

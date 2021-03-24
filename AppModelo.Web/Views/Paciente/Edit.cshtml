@@ -1,18 +1,18 @@
 ﻿@model AppModelo.Services.Models.Paciente
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Alterar Paciente";
 }
 
-<h2>Pacientes</h2>
+<h2>Alterar Paciente</h2>
+<hr />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Alterar</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -34,8 +34,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-1 col-md-10">
-                <a href="javascript:history.go(-1)" class="btn btn-default">Voltar</a>
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a href="javascript:history.go(-1)" class="btn btn-default" data-toggle="tooltip" title="Cancelar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Salvar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
             </div>
         </div>
     </div>
