@@ -37,9 +37,9 @@ namespace AppModelo.Web.Controllers
         }
 
         // GET: Paciente
-        public ActionResult Index(IEnumerable<Paciente> pacientes)
+        public ActionResult Index(IEnumerable<Paciente> obj)
         {
-            return View(pacientes);
+            return View(obj);
         }
 
         // GET: Paciente/Details/5
@@ -48,13 +48,13 @@ namespace AppModelo.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Paciente paciente = service.GetByID(id);
-            if (paciente == null)
+            Paciente obj = service.GetByID(id);
+            if (obj == null)
             {
                 ViewBag.id = id;
                 return View("NotFound");
             }
-            return View(paciente);
+            return View(obj);
         }
 
         // GET: Paciente/Create
@@ -68,14 +68,14 @@ namespace AppModelo.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CartaoSUS")] Paciente paciente)
+        public ActionResult Create(Paciente obj)
         {
             if (ModelState.IsValid)
             {
-                service.Create(paciente);
+                service.Create(obj);
                 return RedirectToAction("Search");
             }
-            return View(paciente);
+            return View(obj);
         }
 
         // GET: Paciente/Edit/5
@@ -84,13 +84,13 @@ namespace AppModelo.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Paciente paciente = service.GetByID(id);
-            if (paciente == null)
+            Paciente obj = service.GetByID(id);
+            if (obj == null)
             {
                 ViewBag.id = id;
                 return View("NotFound");
             }
-            return View(paciente);
+            return View(obj);
         }
 
         // POST: Paciente/Edit/5
@@ -98,14 +98,14 @@ namespace AppModelo.Web.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CartaoSUS")] Paciente paciente)
+        public ActionResult Edit(Paciente obj)
         {
             if (ModelState.IsValid)
             {
-                service.Edit(paciente);
+                service.Edit(obj);
                 return RedirectToAction("Search");
             }
-            return View(paciente);
+            return View(obj);
         }
 
         // GET: Paciente/Delete/5
@@ -114,13 +114,13 @@ namespace AppModelo.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Paciente paciente = service.GetByID(id);
-            if (paciente == null)
+            Paciente obj = service.GetByID(id);
+            if (obj == null)
             {
                 ViewBag.id = id;
                 return View("NotFound");
             }
-            return View(paciente);
+            return View(obj);
         }
 
         // POST: Paciente/Delete/5
@@ -128,8 +128,8 @@ namespace AppModelo.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            Paciente paciente = service.GetByID(id);
-            service.Delete(paciente);
+            Paciente obj = service.GetByID(id);
+            service.Delete(obj);
             return RedirectToAction("Search");
         }
 

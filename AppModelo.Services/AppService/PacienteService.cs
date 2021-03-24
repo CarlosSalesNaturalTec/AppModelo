@@ -30,49 +30,49 @@ namespace AppModelo.Services.AppService
             }
         }
 
-        public IEnumerable<Paciente> GetAllByNome(string Nome)
+        public IEnumerable<Paciente> GetAllByNome(string str)
         {
             using (AppModeloEntities context = new AppModeloEntities())
             {
-                return (from n in context.Paciente where n.Nome.Contains(Nome) orderby n.Nome select n).ToList();
+                return (from n in context.Paciente where n.Nome.Contains(str) orderby n.Nome select n).ToList();
             }
         }
 
-        public IEnumerable<Paciente> GetAllByCartaoSUS(string cartaoSUS)
+        public IEnumerable<Paciente> GetAllByCartaoSUS(string str)
         {
             using (AppModeloEntities context = new AppModeloEntities())
             {
-                return (from n in context.Paciente where n.CartaoSUS.Contains(cartaoSUS) orderby n.Nome select n).ToList();
+                return (from n in context.Paciente where n.CartaoSUS.Contains(str) orderby n.Nome select n).ToList();
             }
         }
 
-        public Paciente Create(Paciente paciente)
+        public Paciente Create(Paciente obj)
         {
             using (AppModeloEntities context = new AppModeloEntities())
             {
-                context.Paciente.Add(paciente);
+                context.Paciente.Add(obj);
                 context.SaveChanges();
-                return paciente;
+                return obj;
             }
         }
 
-        public Paciente Edit(Paciente paciente)
+        public Paciente Edit(Paciente obj)
         {
             using (AppModeloEntities context = new AppModeloEntities())
             {
-                context.Entry(paciente).State = EntityState.Modified;
+                context.Entry(obj).State = EntityState.Modified;
                 context.SaveChanges();
-                return paciente;
+                return obj;
             }
         }
 
-        public Paciente Delete(Paciente paciente)
+        public Paciente Delete(Paciente obj)
         {
             using (AppModeloEntities context = new AppModeloEntities())
             {
-                context.Entry(paciente).State = EntityState.Deleted;
+                context.Entry(obj).State = EntityState.Deleted;
                 context.SaveChanges();
-                return paciente;
+                return obj;
             }
         }
     }
