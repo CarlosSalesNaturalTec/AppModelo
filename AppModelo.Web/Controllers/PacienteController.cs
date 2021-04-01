@@ -19,15 +19,24 @@ namespace AppModelo.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(PacienteViewModel viewModel)
+        public ActionResult Search(PacienteViewModel viewModel, int? page)
         {
             if (ModelState.IsValid)
             {
+                int pageSize = 2; // numero de linhas por página
+                int pageNumber = (page ?? 1);
+
                 if (viewModel.Nome != null)
-                    return View("Index", service.GetAllByNome(viewModel.Nome));
+                {
+                    IEnumerable<Paciente> pacientes = service.GetAllByNome(viewModel.Nome);
+                    return View("Index", pacientes.ToPagedList(pageNumber,pageSize));
+                } 
                 
                 if (viewModel.CartaoSUS != null)
-                    return View("Index", service.GetAllByCartaoSUS(viewModel.CartaoSUS));
+                {
+                    IEnumerable<Paciente> pacientes = service.GetAllByCartaoSUS(viewModel.CartaoSUS);
+                    return View("Index", pacientes.ToPagedList(pageNumber,pageSize));
+                }
             }
             return View(viewModel);
         }
