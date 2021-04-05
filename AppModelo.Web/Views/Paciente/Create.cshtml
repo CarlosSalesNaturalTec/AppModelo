@@ -6,51 +6,165 @@
 
 <h2>Novo Paciente</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-1" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-1" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CartaoSUS, htmlAttributes: new { @class = "control-label col-md-1" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CartaoSUS, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CartaoSUS, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-1 col-md-10">
-                <a href="javascript:history.go(-1)" class="btn btn-default" data-toggle="tooltip" title="Cancelar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Salvar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
-            </div>
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CartaoSUS, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CartaoSUS, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CartaoSUS, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-1" for="CEP">CEP</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="CEP" name="CEP" type="text" maxlength="9"  onblur="buscaCEP(this.value);" />
+        </div>
+        <label class="control-label col-md-1" for="ddd">DDD</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="ddd" name="ddd" type="text" readonly />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-1" for="logradouro">Logradouro</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="logradouro" name="logradouro" type="text" readonly />
+        </div>
+        <label class="control-label col-md-1" for="complemento">Complemento</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="complemento" name="complemento" type="text" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-1" for="bairro">Bairro</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="bairro" name="bairro" type="text" readonly />
+        </div>
+        <label class="control-label col-md-1" for="localidade">Localidade</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="localidade" name="localidade" type="text" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-1" for="uf">UF</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="uf" name="uf" type="text" readonly />
+        </div>
+        <label class="control-label col-md-1" for="ibge">IBGE</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="ibge" name="ibge" type="text" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-1" for="gia">GIA</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="gia" name="gia" type="text" readonly />
+        </div>
+        <label class="control-label col-md-1" for="siafi">SIAFI</label>
+        <div class="col-md-4">
+            <input class="form-control text-box single-line" id="siafi" name="siafi" type="text" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <a href="javascript:history.go(-1)" class="btn btn-default" data-toggle="tooltip" title="Cancelar"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            <button class="btn btn-primary" type="submit" data-toggle="tooltip" title="Salvar"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+        </div>
+    </div>
+</div>
 }
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+
         document.getElementById("Nome").focus();
+
+        function buscaCEP(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+                    var url = "https://viacep.com.br/ws/" + cep + "/json/";     //Webservice para consulta gratuita de CEP
+                    $.get(url, function (data, status) {
+                        if (status == "success") {
+                            if (data.erro) {
+                                limpa_formulario_cep();
+                                return;
+                            }
+                            document.getElementById("logradouro").value = data.logradouro;
+                            document.getElementById("complemento").value = data.complemento;
+                            document.getElementById("bairro").value = data.bairro;
+                            document.getElementById("localidade").value = data.localidade;
+                            document.getElementById("uf").value = data.uf;
+                            document.getElementById("ibge").value = data.ibge;
+                            document.getElementById("gia").value = data.gia;
+                            document.getElementById("ddd").value = data.ddd;
+                            document.getElementById("siafi").value = data.siafi;
+                        } else {
+                            limpa_formulario_cep();
+                        }
+                    });                   
+                } 
+                else {
+                    //cep é inválido.
+                    limpa_formulario_cep();
+                }
+            } 
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulario_cep();
+            }
+            
+        }
+
+        function limpa_formulario_cep() {
+            document.getElementById("logradouro").value = "";
+            document.getElementById("complemento").value = "";
+            document.getElementById("bairro").value = "";
+            document.getElementById("localidade").value = "";
+            document.getElementById("uf").value = "";
+            document.getElementById("ibge").value = "";
+            document.getElementById("gia").value = "";
+            document.getElementById("ddd").value = "";
+            document.getElementById("siafi").value = ""; 
+        }
     </script>
 }
